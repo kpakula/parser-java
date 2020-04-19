@@ -1,8 +1,8 @@
 package employees.parser;
 
+import com.google.gson.Gson;
 import employees.model.Employee;
 import employees.wrapper.EmployeesWrapper;
-import com.google.gson.Gson;
 
 import java.io.FileReader;
 import java.io.IOException;
@@ -24,7 +24,6 @@ public class ParserJsonStrategy implements ParserStrategy {
         try (FileReader reader = new FileReader(filename)) {
             Gson gson = new Gson();
             employeesWrapper = gson.fromJson(reader, EmployeesWrapper.class);
-
         } catch (IOException e) {
             e.printStackTrace();
         }

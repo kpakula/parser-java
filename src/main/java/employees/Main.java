@@ -11,6 +11,7 @@ import java.util.Map;
 
 public class Main {
     public static void main(String[] args) {
+
         ParserFactory parserFactory = new ParserFactory();
         ParserStrategy csvStrategy = parserFactory.getParser("employees.csv");
         ParserStrategy jsonStrategy = parserFactory.getParser("employees.json");
@@ -28,7 +29,6 @@ public class Main {
 
         System.out.println(csvResult);
         System.out.println(jsonResult);
-        System.out.println();
 
     }
 }
