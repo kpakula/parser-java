@@ -1,9 +1,8 @@
 package employees;
 
-import employees.controller.Controller;
 import employees.model.Employee;
-import employees.parser.factory.CsvParserFactory;
-import employees.parser.factory.JsonParserFactory;
+import employees.parser.ParserStrategy;
+import employees.parser.factory.ParserFactory;
 import employees.utils.GroupBy;
 
 import java.math.BigDecimal;
@@ -12,26 +11,24 @@ import java.util.Map;
 
 public class Main {
     public static void main(String[] args) {
-
-        JsonParserFactory jsonParserFactory = new JsonParserFactory();
-        CsvParserFactory csvParserFactory = new CsvParserFactory();
-
-        // Json
-        Controller context = new Controller(jsonParserFactory.makeParser());
-        List<Employee> employeesJson = context.parse("employees.json");
-        Map<String, BigDecimal> jsonResult = GroupBy.groupByJob(employeesJson);
-
-        System.out.println(jsonResult);
+        ParserFactory parserFactory = new ParserFactory();
+        ParserStrategy csvStrategy = parserFactory.getParser("employees.csv");
+        ParserStrategy jsonStrategy = parserFactory.getParser("employees.json");
 
 
-
-//         Csv
-        context = new Controller(csvParserFactory.makeParser());
-        List<Employee> employeesCsv = context.parse("employees.csv");
+        //Csv
+        List<Employee> employeesCsv = csvStrategy.parse();
         Map<String, BigDecimal> csvResult = GroupBy.groupByJob(employeesCsv);
 
 
+        // Json
+        List<Employee> employeesJson = jsonStrategy.parse();
+        Map<String, BigDecimal> jsonResult = GroupBy.groupByJob(employeesJson);
+
+
         System.out.println(csvResult);
+        System.out.println(jsonResult);
+        System.out.println();
 
     }
 }

@@ -5,5 +5,5 @@ import employees.model.Employee;
 import java.util.List;
 
 public interface ParserStrategy {
-    List<Employee> parse(String filename);
+    List<Employee> parse();
 }

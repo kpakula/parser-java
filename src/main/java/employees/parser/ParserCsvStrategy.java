@@ -16,8 +16,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ParserCsvStrategy implements ParserStrategy{
+
+    private String filename;
+
+    public ParserCsvStrategy(String filename) {
+        this.filename = filename;
+    }
+
     @Override
-    public List<Employee> parse(String filename) {
+    public List<Employee> parse() {
         List<Employee> employees = new ArrayList<>();
 
         try (FileReader fileReader = new FileReader(ClassFileLoader.loadFile(filename))){
@@ -27,18 +34,14 @@ public class ParserCsvStrategy implements ParserStrategy{
 
             List<String[]> allData = csvReader.readAll();
 
-
             for (String[] row : allData) {
-
                 long id = Long.parseLong(Replacer.replaceUnwantedSigns(row[0]));
                 String name = Replacer.replaceUnwantedSigns(row[1]);
                 String surname = Replacer.replaceUnwantedSigns(row[2]);
                 String job = Replacer.replaceUnwantedSigns(row[3]);
-                BigDecimal salary = new BigDecimal(Replacer.replaceUnwantedSigns((row[4])));
+                BigDecimal salary = new BigDecimal(Replacer.replaceUnwantedSigns(row[4]));
 
                 Employee employee = new Employee(id, name, surname, job, salary);
-
-
                 employees.add(employee);
             }
 

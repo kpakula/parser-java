@@ -9,8 +9,15 @@ import java.io.IOException;
 import java.util.List;
 
 public class ParserJsonStrategy implements ParserStrategy {
+
+    private String filename;
+
+    public ParserJsonStrategy(String filename) {
+        this.filename = filename;
+    }
+
     @Override
-    public List<Employee> parse(String filename) {
+    public List<Employee> parse() {
 
         EmployeesWrapper employeesWrapper = new EmployeesWrapper();
 
