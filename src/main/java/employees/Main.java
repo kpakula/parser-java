@@ -4,8 +4,6 @@ import employees.model.Employee;
 import employees.parser.ParserStrategy;
 import employees.parser.factory.ParserFactory;
 import employees.utils.GroupBy;
-import org.apache.logging.log4j.Level;
-import org.apache.logging.log4j.status.StatusLogger;
 
 import java.math.BigDecimal;
 import java.util.List;
