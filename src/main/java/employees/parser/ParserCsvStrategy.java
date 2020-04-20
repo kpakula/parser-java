@@ -9,8 +9,7 @@ import employees.loader.ClassFileLoader;
 import employees.model.Employee;
 import employees.model.Sign;
 import employees.utils.Replacer;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
 
 import java.io.FileReader;
 import java.io.IOException;
@@ -19,8 +18,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ParserCsvStrategy implements ParserStrategy{
-
-    private static Logger logger = LoggerFactory.getLogger(ParserCsvStrategy.class);
 
     private String filename;
 
@@ -45,7 +42,8 @@ public class ParserCsvStrategy implements ParserStrategy{
             }
 
         } catch ( CsvException | IOException e) {
-            logger.error(e.getMessage());
+
+            e.printStackTrace();
         }
 
 

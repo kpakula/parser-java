@@ -3,6 +3,7 @@ package employees.wrapper;
 
 import employees.model.Employee;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class EmployeesWrapper {
@@ -13,6 +14,7 @@ public class EmployeesWrapper {
     }
 
     public EmployeesWrapper() {
+        employees = new ArrayList<>();
     }
 
     public List<Employee> getEmployees() {

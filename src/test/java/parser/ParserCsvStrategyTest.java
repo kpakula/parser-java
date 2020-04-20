@@ -68,6 +68,15 @@ public class ParserCsvStrategyTest {
         Assertions.assertEquals(new BigDecimal("3540.20"), employeeList.get(0).getSalary());
     }
 
+    @Test
+    public void shouldBeSecondElementWithSurnameNotGreen() {
+        ParserFactory factory = new ParserFactory();
+        ParserStrategy csvParser = factory.getParser("twoRows.csv");
+
+        List<Employee> employeeList = csvParser.parse();
+
+        Assertions.assertEquals("NotGreen", employeeList.get(1).getSurname());
+    }
 
 
 }
