@@ -2,6 +2,7 @@ package employees.parser;
 
 import com.google.gson.Gson;
 import employees.model.Employee;
+import employees.utils.ClassFileLoader;
 import employees.wrapper.EmployeesWrapper;
 
 import java.io.FileNotFoundException;
@@ -22,7 +23,7 @@ public class ParserJsonStrategy implements ParserStrategy {
 
         EmployeesWrapper employeesWrapper = new EmployeesWrapper();
 
-        try (FileReader reader = new FileReader(filename)) {
+        try (FileReader reader = new FileReader(ClassFileLoader.loadFile(filename))) {
             Gson gson = new Gson();
             employeesWrapper = gson.fromJson(reader, EmployeesWrapper.class);
         } catch (IOException e) {

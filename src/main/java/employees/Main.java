@@ -29,7 +29,10 @@ public class Main {
         Map<String, BigDecimal> jsonResult = GroupBy.groupByJob(employeesJson);
 
 
+        System.out.println("-CSV-");
         System.out.println(csvResult);
+        System.out.println();
+        System.out.println("-JSON-");
         System.out.println(jsonResult);
 
     }
