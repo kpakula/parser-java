@@ -20,7 +20,7 @@ public class EmployeeJsonAdapter implements JsonDeserializer<Employee> {
         final String job = object.get("job").getAsString();
 
         String salaryString = object.get("salary").getAsString();
-        String replacedSalaryString = Replacer.replaceCommaByDot(salaryString);
+        String replacedSalaryString = Replacer.replaceUnwantedSigns(salaryString);
 
         final BigDecimal salary = new BigDecimal(replacedSalaryString);
 
