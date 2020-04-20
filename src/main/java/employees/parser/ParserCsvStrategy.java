@@ -7,7 +7,10 @@ import com.opencsv.CSVReaderBuilder;
 import com.opencsv.exceptions.CsvException;
 import employees.loader.ClassFileLoader;
 import employees.model.Employee;
+import employees.model.Sign;
 import employees.utils.Replacer;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.FileReader;
 import java.io.IOException;
@@ -16,6 +19,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ParserCsvStrategy implements ParserStrategy{
+
+    private static Logger logger = LoggerFactory.getLogger(ParserCsvStrategy.class);
 
     private String filename;
 
@@ -29,27 +34,31 @@ public class ParserCsvStrategy implements ParserStrategy{
 
         try (FileReader fileReader = new FileReader(ClassFileLoader.loadFile(filename))){
 
-            CSVParser parser = new CSVParserBuilder().withSeparator(';').build();
+            CSVParser parser = new CSVParserBuilder().withSeparator(Sign.CSV_SEPARATOR).build();
             CSVReader csvReader = new CSVReaderBuilder(fileReader).withCSVParser(parser).withSkipLines(1).build();
 
             List<String[]> allData = csvReader.readAll();
 
             for (String[] row : allData) {
-                long id = Long.parseLong(Replacer.replaceUnwantedSigns(row[0]));
-                String name = Replacer.replaceUnwantedSigns(row[1]);
-                String surname = Replacer.replaceUnwantedSigns(row[2]);
-                String job = Replacer.replaceUnwantedSigns(row[3]);
-                BigDecimal salary = new BigDecimal(Replacer.replaceUnwantedSigns(row[4]));
-
-                Employee employee = new Employee(id, name, surname, job, salary);
+                Employee employee = makeEmployee(row);
                 employees.add(employee);
             }
 
-        } catch (IOException | CsvException e) {
-            e.printStackTrace();
+        } catch ( CsvException | IOException e) {
+            logger.error(e.getMessage());
         }
 
 
         return employees;
+    }
+
+    private Employee makeEmployee(String[] row) {
+        long id = Long.parseLong(Replacer.replaceUnwantedSigns(row[0]));
+        String name = Replacer.replaceUnwantedSigns(row[1]);
+        String surname = Replacer.replaceUnwantedSigns(row[2]);
+        String job = Replacer.replaceUnwantedSigns(row[3]);
+        BigDecimal salary = new BigDecimal(Replacer.replaceUnwantedSigns(row[4]));
+
+        return new Employee(id, name, surname, job, salary);
     }
 }

@@ -1,3 +1,5 @@
+package parser.factory;
+
 import employees.parser.ParserCsvStrategy;
 import employees.parser.ParserJsonStrategy;
 import employees.parser.ParserStrategy;
@@ -5,7 +7,7 @@ import employees.parser.factory.ParserFactory;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-public class ParserStrategyTest {
+public class ParserFactoryTest {
 
 
     @Test
@@ -57,6 +59,5 @@ public class ParserStrategyTest {
 
         Assertions.assertNotNull(strategy);
     }
-
 
 }

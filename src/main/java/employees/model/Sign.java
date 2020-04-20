@@ -6,5 +6,5 @@ public class Sign {
     public static final String WHITESPACES = "\\s";
     public static final String EMPTY = "";
     public static final String QUOTATION_MARK = "\"";
-    public static final String SEMICOLON = ";";
+    public static final char CSV_SEPARATOR = ';';
 }
