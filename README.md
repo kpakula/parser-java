@@ -1,6 +1,6 @@
 # Parser application
 The application which parse .csv and .json files 
-and on the output gives calculated salary for specific jobs.
+and on the output gives calculated salary for specific jobs for each file.
 
 
 
