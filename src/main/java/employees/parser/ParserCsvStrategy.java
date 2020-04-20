@@ -5,7 +5,7 @@ import com.opencsv.CSVParserBuilder;
 import com.opencsv.CSVReader;
 import com.opencsv.CSVReaderBuilder;
 import com.opencsv.exceptions.CsvException;
-import employees.loader.ClassFileLoader;
+import employees.utils.ClassFileLoader;
 import employees.model.Employee;
 import employees.model.Sign;
 import employees.utils.Replacer;
