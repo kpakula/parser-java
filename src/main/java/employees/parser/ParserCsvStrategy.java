@@ -10,16 +10,21 @@ import employees.model.Employee;
 import employees.model.Sign;
 import employees.utils.Replacer;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
+
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ParserCsvStrategy implements ParserStrategy{
+public class ParserCsvStrategy implements ParserStrategy {
 
-    private String filename;
+    private final String filename;
+    private static final Logger logger = LoggerFactory.getLogger(ParserCsvStrategy.class);
 
     public ParserCsvStrategy(String filename) {
         this.filename = filename;
@@ -29,7 +34,7 @@ public class ParserCsvStrategy implements ParserStrategy{
     public List<Employee> parse() {
         List<Employee> employees = new ArrayList<>();
 
-        try (FileReader fileReader = new FileReader(ClassFileLoader.loadFile(filename))){
+        try (FileReader fileReader = new FileReader(ClassFileLoader.loadFile(filename))) {
 
             CSVParser parser = new CSVParserBuilder().withSeparator(Sign.CSV_SEPARATOR).build();
             CSVReader csvReader = new CSVReaderBuilder(fileReader).withCSVParser(parser).withSkipLines(1).build();
@@ -41,9 +46,12 @@ public class ParserCsvStrategy implements ParserStrategy{
                 employees.add(employee);
             }
 
-        } catch ( CsvException | IOException e) {
-
-            e.printStackTrace();
+        } catch (CsvException e) {
+            logger.error("Csv File Exception " + e.getMessage());
+        } catch (FileNotFoundException fileNotFoundException) {
+            logger.error("File Not Found Exception " + fileNotFoundException.getMessage());
+        } catch (IOException ioException) {
+            logger.error("IOException " + ioException.getMessage());
         }
 
 
