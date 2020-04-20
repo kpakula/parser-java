@@ -4,6 +4,7 @@ import employees.parser.ParserCsvStrategy;
 import employees.parser.ParserJsonStrategy;
 import employees.parser.ParserStrategy;
 import employees.parser.factory.ParserFactory;
+import employees.parser.factory.exceptions.UnknownFileTypeException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -45,11 +46,11 @@ public class ParserFactoryTest {
 
 
     @Test
-    void shouldBeNullParser() {
-        ParserFactory parserFactory = new ParserFactory();
-        ParserStrategy strategy = parserFactory.getParser("x.xx");
-
-        Assertions.assertNull(strategy);
+    void shouldBeThrowException() {
+        Assertions.assertThrows(UnknownFileTypeException.class, () -> {
+            ParserFactory parserFactory = new ParserFactory();
+            ParserStrategy strategy = parserFactory.getParser("x.xx");
+        });
     }
 
     @Test
